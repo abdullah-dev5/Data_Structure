@@ -1,3 +1,8 @@
+
+// Array  should have consecutive Numbers.Unsorted
+//when given range  1 to N .use cyclic Sort.
+// time  O(N)
+//we move i when the value is at their right index.
 public class CycleSorting {
     
 
