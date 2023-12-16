@@ -22,8 +22,6 @@ public class DirectedGraphList {
             addVertex(vertex2);
         }
         map.get(vertex1).add(vertex2);
-        // Remove the line below to make it a directed graph
-        // map.get(vertex2).add(vertex1);
     }
 
     public ArrayList<Integer> getAdjacentVertices(int vertex) {
@@ -36,17 +34,15 @@ public class DirectedGraphList {
     public void removeEdge(int vertex1, int vertex2) {
         if (map.containsKey(vertex1) && map.containsKey(vertex2)) {
             map.get(vertex1).remove(Integer.valueOf(vertex2));
-            // Remove the line below to make it a directed graph
-            // map.get(vertex2).remove(Integer.valueOf(vertex1));
         }
     }
 
     public void removeVertex(int vertex) {
         if (map.containsKey(vertex)) {
             // Remove the vertex from the map
-            map.remove(vertex);
-
-            // Iterate through all vertices and remove the edges pointing to the removed vertex
+            map.remove(vertex); 
+            // Hashmap.keyset()  
+            // Return Value: The method returns a set having the keys of the hash map.
             for (int key : map.keySet()) {
                 map.get(key).remove(Integer.valueOf(vertex));
             }
