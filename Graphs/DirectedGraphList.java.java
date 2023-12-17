@@ -62,7 +62,8 @@ public class DirectedGraphList {
             numOfVertics--;
         }
     }
-     ArrayList<Integer> getNeighbor(int vertex)
+   
+   private ArrayList<Integer> getNeighbor(int vertex)
      {
             ArrayList<Integer> neighbors =  new ArrayList<>(getAdjacentVertices(vertex));
 
@@ -89,6 +90,43 @@ public class DirectedGraphList {
         }
         System.out.println();
      }
+
+     private HashMap<Integer, ArrayList<Integer>> transposeGraph() {
+        HashMap<Integer, ArrayList<Integer>> transposeList = new HashMap<>();
+
+        // filling empty transpose list .
+        for (int vertex : map.keySet()) {
+            transposeList.put(vertex, new ArrayList<>());
+        }
+
+        for (int vertex : map.keySet()) {
+            // fetch whole list saved at vertex . or specific vertexs neighbor list.
+            // the neighbors are saved in out Going so we get out going in neighbor list.
+            ArrayList<Integer> neighbors = map.get(vertex);
+
+            for (int neighbor : neighbors) {
+                // vertex to neighbor, After transposed graph. neighbor to vertex.
+                transposeList.get(neighbor).add(vertex);
+            }
+
+        }
+
+        return transposeList;
+    }
+
+    void printTransposed() {
+        System.out.print(" Printing Transposed Graph:  ");
+        HashMap<Integer, ArrayList<Integer>> list = transposeGraph();
+        for (int vertex : list.keySet()) {
+            System.out.print(vertex + " --> ");
+            for (int adjacentVertex : list.get(vertex)) {
+                System.out.print(adjacentVertex + " ");
+            }
+            System.out.println();
+        }
+
+    }
+
 
 
     void outgoingDegree(int vertex) {
@@ -128,9 +166,11 @@ public class DirectedGraphList {
 
     public static void main(String[] args) {
         DirectedGraphList graph = new DirectedGraphList();
-        graph.addEdge(0, 1);
+          graph.addEdge(0, 1);
+        graph.addEdge(1, 2);
         graph.addEdge(2, 3);
-        graph.addEdge(4, 3);
+        graph.addEdge(3, 0);
+
         graph.addEdge(5, 3);
         graph.addEdge(5, 4);
 
@@ -150,6 +190,10 @@ public class DirectedGraphList {
         System.out.println(graph.getNumVertics());
 
         graph.printNeighbor(5);
+        graph.printGraph();
+
+        graph.printTransposed();
+   
        
     }
 }
